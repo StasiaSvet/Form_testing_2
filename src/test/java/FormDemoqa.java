@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,18 +16,21 @@ public class FormDemoqa {
 
     @Test
     void successfulFillTestWithNotBestLocators() throws InterruptedException {
-        String name = "Ivan";
+        String firstName = "Ivan";
         String lastName = "Ivanov";
         String email = "ivanivanov@vvv.com";
-        String userNumber = "3334445";
-        String subjectInput1 = "Eng";
-        String subjectInput2 = "Bio";
+        String userNumber = "3334445556";
+        String subjectInput1 = "English";
+        String subjectInput2 = "Biology";
+        String cAddress = "ABC 123 KKK";
+        String state = "Rajasthan";
+        String city = "Jaiselmer";
 
 
 
         open("https://demoqa.com/automation-practice-form");
 
-        $("#firstName").setValue(name);
+        $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(email);
         $(byText("Male")).click();
@@ -41,22 +45,30 @@ public class FormDemoqa {
         $("#subjectsInput").setValue(subjectInput2).pressEnter();
         $("#hobbies-checkbox-1+label").click();
         $("#hobbies-checkbox-2+label").click();
+        $("#uploadPicture").uploadFromClasspath("111.jpg");
+        $("#currentAddress").setValue(cAddress);
+        $("#state").click();
+        $(byText(state)).click();
+        $("#city").click();
+        $(byText(city)).click();
 
+        //Select by input
+        //$("#react-select-3-input").setValue("Haryana").pressEnter();
+        //$("#react-select-4-input").setValue("Panipat").pressEnter();
 
-        sleep(10000);
+        $("#submit").click();
 
-
-
-
-
-
+        $(".modal-content").shouldHave(
+                Condition.text(firstName + lastName),
+                Condition.text(email),
+                Condition.text("Male"),
+                Condition.text(userNumber),
+                Condition.text("02 April,1986"),
+                Condition.text(subjectInput1 + ", " + subjectInput2),
+                Condition.text("Sports, Reading"),
+                Condition.text("111.jpg"),
+                Condition.text(cAddress),
+                Condition.text(state + " " + city));
+        $("#closeLargeModal").click();
     }
-
-
-
-
-
-
-
-
 }
