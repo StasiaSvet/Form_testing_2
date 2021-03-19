@@ -1,5 +1,6 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ public class FormDemoqa {
     }
 
     @Test
-    void successfulFillTestWithNotBestLocators() throws InterruptedException {
+    void successfulFillTestWithNotBestLocators() {
         String firstName = "Ivan";
         String lastName = "Ivanov";
         String email = "ivanivanov@vvv.com";
@@ -43,8 +44,8 @@ public class FormDemoqa {
 
         $("#subjectsInput").setValue(subjectInput1).pressEnter();
         $("#subjectsInput").setValue(subjectInput2).pressEnter();
-        $("#hobbies-checkbox-1+label").click();
-        $("#hobbies-checkbox-2+label").click();
+        $(byText("Sports")).click();
+        $(byText("Reading")).click();
         $("#uploadPicture").uploadFromClasspath("111.jpg");
         $("#currentAddress").setValue(cAddress);
         $("#state").click();
@@ -59,6 +60,7 @@ public class FormDemoqa {
         $("#submit").click();
 
         $(".modal-content").shouldHave(
+
                 Condition.text(firstName + lastName),
                 Condition.text(email),
                 Condition.text("Male"),
@@ -70,5 +72,9 @@ public class FormDemoqa {
                 Condition.text(cAddress),
                 Condition.text(state + " " + city));
         $("#closeLargeModal").click();
+        $(".modal-content").shouldNotBe(Condition.visible);
+
+        //Sleep(5000);
+
     }
 }
