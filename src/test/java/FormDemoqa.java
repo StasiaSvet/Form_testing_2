@@ -4,6 +4,7 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -61,18 +62,18 @@ public class FormDemoqa {
 
         $(".modal-content").shouldHave(
 
-                Condition.text(firstName + lastName),
-                Condition.text(email),
-                Condition.text("Male"),
-                Condition.text(userNumber),
-                Condition.text("02 April,1986"),
-                Condition.text(subjectInput1 + ", " + subjectInput2),
-                Condition.text("Sports, Reading"),
-                Condition.text("111.jpg"),
-                Condition.text(cAddress),
-                Condition.text(state + " " + city));
+                text(firstName + lastName),
+                text(email),
+                text("Male"),
+                text(userNumber),
+                text("02 April,1986"),
+                text(subjectInput1 + ", " + subjectInput2),
+                text("Sports, Reading"),
+                text("111.jpg"),
+                text(cAddress),
+                text(state + " " + city));
         $("#closeLargeModal").click();
-        $(".modal-content").shouldNotBe(Condition.visible);
+        $(".modal-content").shouldNotBe(visible);
 
         //Sleep(5000);
 
