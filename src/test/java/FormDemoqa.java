@@ -15,7 +15,7 @@ public class FormDemoqa {
     }
 
     @Test
-    void successfulFillTestWithNotBestLocators() {
+    void fillInForm() {
         String firstName = "Ivan";
         String lastName = "Ivanov";
         String email = "ivanivanov@vvv.com";
@@ -57,6 +57,7 @@ public class FormDemoqa {
 
         //---Address
         $("#currentAddress").setValue(cAddress);
+        $("#state").scrollIntoView(true);
         $("#state").click();
         $(byText(state)).click();
         $("#city").click();
